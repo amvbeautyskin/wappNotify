@@ -4,7 +4,6 @@ const { makeWASocket, useMultiFileAuthState, delay } = require("@whiskeysockets/
 const fs = require("fs");
 const path = require("path");
 const CALENDAR_ID = process.env.CALENDAR_ID;
-// 📌 Scrie credentialele într-un fișier temporar
 fs.writeFileSync("google-credentials.json", process.env.GOOGLE_CREDENTIALS);
 let sock;
 
@@ -113,7 +112,6 @@ async function checkAndSendReminders() {
             const appointmentDate = new Date(appointment.date);
             const formattedDate = appointmentDate.toLocaleString('ro-RO', optionsShort);
             const dayAndTime = formattedDate.replace(/^.*?(\d{1,2} \w+.*?), (\d{2}:\d{2})$/, '$1 la ora $2');
-            // let message = `🔔 Salut ${name}, ai o programare mâine, ${dayAndTime}! Te așteptăm cu drag! Uite locația salonului:
             let message = `🔔 Reminder 🔔\nProgramare AMV Beauty Skin\nMâine, ${dayAndTime}.\nVă așteptăm cu drag!\n- 📍Maps: ${mapLinkGoogle}\n- 📍Waze: ${mapLinkWaze}`;
             await sendWhatsAppMessage(appointment.phone, message);
         }
