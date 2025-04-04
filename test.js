@@ -1,3 +1,4 @@
+global.crypto = require('crypto');
 const { google } = require("googleapis");
 const { makeWASocket, useMultiFileAuthState, delay } = require("@whiskeysockets/baileys");
 const fs = require("fs");
