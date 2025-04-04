@@ -20,10 +20,13 @@ jobs:
       - name: 📦 Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18 # Poți schimba versiunea dacă e necesar
+          node-version: 18 # Setează Node.js 18+
+
+      - name: 🔄 Update dependencies
+        run: npm update @whiskeysockets/baileys
 
       - name: 📜 Install dependencies
         run: npm install
 
       - name: 🚀 Run script
-        run: node test.js # Înlocuiește "index.js" cu fișierul tău principal
+        run: node test.js # Înlocuiește "test.js" cu fișierul tău principal
