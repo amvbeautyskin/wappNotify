@@ -1,0 +1,25 @@
+name: Daily WhatsApp Reminder
+
+on:
+  schedule:
+    - cron: "0 7 * * 0-5" # Rulează în fiecare zi la ora 07:00 UTC (mai puțin sâmbăta)
+  workflow_dispatch: # Permite rularea manuală a scriptului
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Clone repository
+        uses: actions/checkout@v4
+
+      - name: 📦 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18 # Poți schimba versiunea dacă e necesar
+
+      - name: 📜 Install dependencies
+        run: npm install
+
+      - name: 🚀 Run script
+        run: node test.js # Înlocuiește "index.js" cu fișierul tău principal
