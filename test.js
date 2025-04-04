@@ -113,10 +113,13 @@ async function checkAndSendReminders() {
             const appointmentDate = new Date(appointment.date);
             const formattedDate = appointmentDate.toLocaleString('ro-RO', optionsShort);
             const dayAndTime = formattedDate.replace(/^.*?(\d{1,2} \w+.*?), (\d{2}:\d{2})$/, '$1 la ora $2');
-            let message = `🔔 Salut ${name}, ai o programare mâine, ${dayAndTime}! Te așteptăm cu drag! Uite locația salonului:
-            
-            - [Vezi pe Google Maps](${mapLinkGoogle})
-            - [Vezi pe Waze](${mapLinkWaze})`;
+            // let message = `🔔 Salut ${name}, ai o programare mâine, ${dayAndTime}! Te așteptăm cu drag! Uite locația salonului:
+            let message = `🔔 Reminder 🔔
+            Programare AMV Beauty Skin
+            Mâine, ${dayAndTime}.
+            Vă așteptăm cu drag!
+            - Google Maps: ${mapLinkGoogle}
+            - Waze: ${mapLinkWaze}`;
             await sendWhatsAppMessage(appointment.phone, message);
         }
     }
