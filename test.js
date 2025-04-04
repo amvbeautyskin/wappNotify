@@ -105,12 +105,18 @@ async function checkAndSendReminders() {
             timeZone: 'Europe/Bucharest',
         };
 
+        const mapLinkGoogle = 'https://maps.app.goo.gl/dj9dhxBNHuk7EtSg8';
+        const mapLinkWaze = 'https://ul.waze.com/ul?place=ChIJiyP4_2b1ukARtyr3f8KIqgA&ll=44.32471970%2C28.60946700&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location';
+
         for(const appointment of appointments){
             let name = extractName(appointment.title);
             const appointmentDate = new Date(appointment.date);
             const formattedDate = appointmentDate.toLocaleString('ro-RO', optionsShort);
             const dayAndTime = formattedDate.replace(/^.*?(\d{1,2} \w+.*?), (\d{2}:\d{2})$/, '$1 la ora $2');
-            let message = `🔔 Salut ${name}, ai o programare mâine, ${dayAndTime}! Te așteptăm cu drag!`;
+            let message = `🔔 Salut ${name}, ai o programare mâine, ${dayAndTime}! Te așteptăm cu drag! Uite locația salonului:
+            
+            - [Vezi pe Google Maps](${mapLinkGoogle})
+            - [Vezi pe Waze](${mapLinkWaze})`;
             await sendWhatsAppMessage(appointment.phone, message);
         }
     }
