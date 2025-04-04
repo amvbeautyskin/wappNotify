@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "amv-beauty-skin-453413",
+  "private_key_id": "f3840ce797a0f3dd47a356159ac7236c498d8fdf",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC9zZ5P+CVljJ7j\ncTGWjsPsrq2FkxS9g80ABBM+Pw2zjb1P1cJhA6SUK7HtPnAXvWKRnSh7vsWl/G1d\nhvEauj9d5V5fdXozUzUfpRtonMzOEWDWabCO3iKxIebDIwY0L9ilvoiH7JYTVbZH\n9EZcpbzoOkDubs9WNrjkRgkTDd84BWXyk+1yPm6PLkpTsAQ/1LnLuqkP58fPO/XN\npUreQJoOSOmND6VzxsiVLvtqMXT3ByP5VDx8gEsn04nJwEUokVGWHCX42g14G52b\nOoFFg5jqJFC8qh1cYvDFfJsAVjQYR0naqmalvmdK78BEoekfjcdMK0x7E1RQEWJH\nw4Cb9Nm3AgMBAAECggEAC2u9fHNikK86+lWb1cLmcC38m/6DL3ooUjlsjQDPSsAb\nJZwns527//x3Gt74cL1BGqD5yCRtETVUwV120ZRmbrh4CsdvYHo/xpUxRoS04Ct0\nh8JZUOd17/GpyJEpdOdyIlsKLR+j0isEqmS8/SMt8E1dDdvWFwp46qd6MU7S4TR7\nMhI5pGbu9pmFts7IaDphBBG6XqL8m1NfcsLaqqRYoqiD5ybO+Abie0EAdJTxWskZ\nZvoMirVcvGu2RUb28SZQhI9Dfr4KARUT2RCI3LvlCpCRHL+mB0TA/igLHiJh4UF8\nySvxued6NoGBY5IgX4iC70UP48lYFN4HRG356MEJxQKBgQD7PyeellBnm7cc34q7\n2FJI1EaGrHRB0CGBh7gcZmUcu9H5oeGsiDlbZCwXE+TUi9O1/JyJsvK+c4fcQcvQ\nFMcQzRB/CbBxWLaVrFxvoTaIfRzfEzcOReoggrmAs1LcrbQhC0Tb06ScEuWAiIyf\nfd7T4lvdTXklcNBsiOWCRYOrfQKBgQDBZODzMCeVs4X1T8KHuujEWxXYrx8M+JSc\nMDl+/3fS8oHvxyteKzaI3pmuMOGde5AebTB5pMigrioSJy5RCn2Cptk1Q6ZU7u3I\nd7AD3Korbxlya6GvDGyG+bIb8dZSFYrQnDHXsTUE1XMQcBB8xpifGbP2zKqErbcI\n/wWSI3xYQwKBgGh2pNGCbCH4E5W0uGlME0JmyIAcWiY3FIdX18wvIuFkknR5w2xK\nI5cFOnPJ+L4K+VbUln2GYvme7aE91jFJQk+RA8feTneCTEBFLxXW8OalJoj141FS\n7nrf/6MsbEqHCrsmhVXlVK70CGp93AJAgpKUrl+AY9uWYYKPFOYqYwm9AoGAPlpS\nFNZvzNpm1GL062Id7kEX2BcOQdZbw8fgocuoTIEX18E1gFUabiKnFfx4oZfXLZgy\nyuWQMg41TkkHq+Vf9iHpYjz/gd7PF5VPUM9ypjJZ2ARPyuqMizAydsQQP8LmUMAr\nacmeuIJBaQlYp4I4bwOQfIAcck639tSSbT23t5UCgYEAia/fLyl9cdScG99v9JP8\nqMSDqOM/i79H+nbSNpyzTWyvMSgpSSUM6tzmj2tIbnNTQz2EXi3WB+l3VPmf4m55\nb1owJgFnU1nft3xQzG2InF5YcgOKF+uvvV3M5HTByQ5PAzP5eBBGBGU0MMD4cd5y\nEp7OUs92nFAUCVySbkEi8i4=\n-----END PRIVATE KEY-----\n",
+  "client_email": "amv-beauty-skin-app@amv-beauty-skin-453413.iam.gserviceaccount.com",
+  "client_id": "108011318255607101331",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/amv-beauty-skin-app%40amv-beauty-skin-453413.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
