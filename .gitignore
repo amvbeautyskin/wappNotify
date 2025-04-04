@@ -1,0 +1,17 @@
+# 📂 Nodules și dependințe generate
+node_modules/
+package-lock.json
+
+# 📂 Credite și autentificare
+auth_info/
+google-credentials.json
+config/
+
+# 📂 Fișiere generate la runtime
+*.log
+*.gz
+.DS_Store
+.env
+
+# 📂 Fișiere GitHub Actions temporare
+auth_info.tar.gz

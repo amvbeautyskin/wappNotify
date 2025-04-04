@@ -1,5 +1,9 @@
 name: Daily WhatsApp Reminder
 
+env:
+  GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+  CALENDAR_ID: ${{ secrets.CALENDAR_ID }}
+
 on:
   schedule:
     - cron: "0 7 * * 0-5" # Rulează în fiecare zi la ora 07:00 UTC (mai puțin sâmbăta)

@@ -2,7 +2,9 @@ const { google } = require("googleapis");
 const { makeWASocket, useMultiFileAuthState, delay } = require("@whiskeysockets/baileys");
 const fs = require("fs");
 const path = require("path");
-const CALENDAR_ID = "d1fa751e242a84ed93ddc2857e6bfb9b5e8bc3b0688a64012bb6c73b456f0949@group.calendar.google.com";
+const CALENDAR_ID = process.env.CALENDAR_ID;
+// 📌 Scrie credentialele într-un fișier temporar
+fs.writeFileSync("google-credentials.json", process.env.GOOGLE_CREDENTIALS);
 let sock;
 
 function extractPhoneNumber(description) {
@@ -18,7 +20,8 @@ function extractName(title) {
 
 async function getAppointments() {
     const auth = new google.auth.GoogleAuth({
-        keyFile: "./config/amv-beauty-skin-453413-f3840ce797a0.json",
+        // keyFile: "./config/amv-beauty-skin-453413-f3840ce797a0.json",
+        keyFile: "google-credentials.json",
         scopes: ["https://www.googleapis.com/auth/calendar.readonly"],
     });
 
