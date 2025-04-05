@@ -6,7 +6,7 @@ env:
 
 on:
   schedule:
-    - cron: "0 16 * * 0-5" # Rulează în fiecare zi la ora 07:00 UTC (mai puțin sâmbăta)
+    - cron: "0 15 * * 0-5" # Rulează în fiecare zi la ora 07:00 UTC (mai puțin sâmbăta)
   workflow_dispatch: # Permite rularea manuală a scriptului
 
 jobs:
