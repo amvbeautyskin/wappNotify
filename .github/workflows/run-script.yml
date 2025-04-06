@@ -6,7 +6,8 @@ env:
 
 on:
   schedule:
-    - cron: "0 15 * * 0-5" # Rulează în fiecare zi la ora 18:00 UTC (mai puțin sâmbăta)
+    # - cron: "0 15 * * 0-5" # Rulează în fiecare zi la ora 18:00 UTC (mai puțin sâmbăta)
+    - cron: "0 12 * * 0-5" # Rulează azi de test la ora 13:00 ora Romaniei
   workflow_dispatch: # Permite rularea manuală a scriptului
 
 jobs:
@@ -29,4 +30,4 @@ jobs:
         run: npm install
 
       - name: 🚀 Run script
-        run: node test.js # Înlocuiește "test.js" cu fișierul tău principal
+        run: node test.js
