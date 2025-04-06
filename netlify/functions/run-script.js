@@ -4,7 +4,8 @@ const path = require('path');
 exports.handler = async (event, context) => {
   try {
     // Execută scriptul tău aici (test.js)
-    const scriptPath = path.join(__dirname, 'test.js');
+    const scriptPath = path.join(__dirname, '../../test.js');
+    console.log('Calea către script:', scriptPath);
     exec(`node ${scriptPath}`, (err, stdout, stderr) => {
       if (err) {
         console.error('Error:', err);
