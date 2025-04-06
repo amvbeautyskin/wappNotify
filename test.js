@@ -20,7 +20,6 @@ function extractName(title) {
 
 async function getAppointments() {
     const auth = new google.auth.GoogleAuth({
-        // keyFile: "./config/amv-beauty-skin-453413-f3840ce797a0.json",
         keyFile: "google-credentials.json",
         scopes: ["https://www.googleapis.com/auth/calendar.readonly"],
     });
@@ -29,7 +28,6 @@ async function getAppointments() {
     const calendar = google.calendar("v3");
 
     const now = new Date();
-
     const tomorrow = new Date(now);
     tomorrow.setDate(now.getDate() + 1);
 
@@ -39,8 +37,8 @@ async function getAppointments() {
     const response = await calendar.events.list({
         auth: authClient,
         calendarId: CALENDAR_ID,
-        timeMin: timeMin,
-        timeMax: timeMax,
+        timeMin,
+        timeMax,
         singleEvents: true,
         orderBy: "startTime",
     });
@@ -59,6 +57,8 @@ async function startWhatsApp() {
     sock = makeWASocket({
         auth: state,
         printQRInTerminal: true,
+        syncFullHistory: false,
+        shouldSyncHistoryMessage: false,
     });
 
     sock.ev.on("creds.update", saveCreds);
@@ -70,9 +70,20 @@ async function startWhatsApp() {
         } else if (connection === 'close') {
             console.log("🔴 Conexiunea a fost închisă, reîncerc...");
             if (lastDisconnect?.error?.output?.statusCode !== 401) {
-                startWhatsApp(); // Reîncearcă logarea
+                startWhatsApp();
             }
         }
+    });
+}
+
+async function waitForConnection() {
+    return new Promise((resolve, reject) => {
+        const interval = setInterval(() => {
+            if (sock?.ws?.readyState === 1) {
+                clearInterval(interval);
+                resolve();
+            }
+        }, 1000); // Verifică conexiunea la fiecare 1 secundă
     });
 }
 
@@ -90,11 +101,19 @@ async function sendWhatsAppMessage(phone, message) {
 
 async function checkAndSendReminders() {
     await startWhatsApp();
+
+    try {
+        await waitForConnection();  // Așteaptă să se deschidă conexiunea
+    } catch (error) {
+        console.error("❌ Eroare la conectare:", error);
+        return;
+    }
+
     await new Promise(resolve => setTimeout(resolve, 5000));;
 
     const appointments = await getAppointments();
 
-    async function sendMessage() {
+    // async function sendMessage() {
         if (!sock) {
             console.log("⚠️ WhatsApp nu este conectat. Reîncerc...");
             return;
@@ -124,12 +143,14 @@ async function checkAndSendReminders() {
             await sendWhatsAppMessage(appointment.phone, message);
             await new Promise(resolve => setTimeout(resolve, 3000));
         }
-    }
-    setTimeout(async () => {
-        await sendMessage();
         process.exit(0);
-    }, 3000);
-    return
+    // }
+    // setTimeout(async () => {
+    //     await sendMessage();
+    //     process.exit(0);
+    // }, 3000);
+    // return
 }
+
 
 checkAndSendReminders();
