@@ -1,25 +1,27 @@
 const { exec } = require('child_process');
 const path = require('path');
+const util = require('util');
+const execPromise = util.promisify(exec); // transforma în promisă
 
 exports.handler = async (event, context) => {
   try {
-    // Execută scriptul tău aici (test.js)
     const scriptPath = path.join(__dirname, '../../test.js');
     console.log('Calea către script:', scriptPath);
-    exec(`node ${scriptPath}`, (err, stdout, stderr) => {
-      if (err) {
-        console.error('Error:', err);
-        return { statusCode: 500, body: 'Error executing script' };
-      }
-      console.log(stdout);
-    });
+
+    const { stdout, stderr } = await execPromise(`node ${scriptPath}`);
+
+    console.log('stdout:', stdout);
+    console.log('stderr:', stderr);
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ message: 'Scriptul a fost executat cu succes!' }),
+      body: JSON.stringify({ message: 'Scriptul a fost executat cu succes!', output: stdout }),
     };
   } catch (error) {
-    console.error(error);
-    return { statusCode: 500, body: 'Eroare la rularea scriptului' };
+    console.error('Eroare la execuție:', error);
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ message: 'Eroare la rularea scriptului', error: error.message }),
+    };
   }
 };
