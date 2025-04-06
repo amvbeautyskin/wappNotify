@@ -28,11 +28,19 @@ async function getAppointments() {
     const authClient = await auth.getClient();
     const calendar = google.calendar("v3");
 
+    const now = new Date();
+
+    const tomorrow = new Date(now);
+    tomorrow.setDate(now.getDate() + 1);
+
+    const timeMin = new Date(tomorrow.setHours(0, 0, 0, 0)).toISOString();
+    const timeMax = new Date(tomorrow.setHours(23, 59, 59, 999)).toISOString();
+
     const response = await calendar.events.list({
         auth: authClient,
         calendarId: CALENDAR_ID,
-        timeMin: new Date().toISOString(),
-        timeMax: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+        timeMin: timeMin,
+        timeMax: timeMax,
         singleEvents: true,
         orderBy: "startTime",
     });
