@@ -57,7 +57,8 @@ async function startWhatsApp() {
     sock = makeWASocket({
         auth: state,
         printQRInTerminal: true,
-        syncFullHistory: false,
+        // syncFullHistory: false,
+        syncFullHistory: true, // test only
         shouldSyncHistoryMessage: false,
     });
 
@@ -94,7 +95,10 @@ async function sendWhatsAppMessage(phone, message) {
         await startWhatsApp();
     }
 
+    console.log("📶 Stare socket:", sock?.user?.id);// test only
     console.log(`📨 Trimitere mesaj către ${phone}`);
+    await sock.sendPresenceUpdate('available', `4${phone}@s.whatsapp.net`);
+    await delay(500); // 0.5 secunde pauză
     await sock.sendMessage(`4${phone}@s.whatsapp.net`, { text: message });
     console.log("✅ Mesaj trimis!");
 }
