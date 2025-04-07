@@ -81,7 +81,7 @@ async function sendWhatsAppMessage(phone, message) {
     await sock.sendPresenceUpdate('available', `4${phone}@s.whatsapp.net`);
     await delay(1000); // 1 secunde pauză
     console.log(`📨 Trimitere mesaj către ${phone}`);
-    await sock.sendMessage(`${phone}@s.whatsapp.net`, { text: message });
+    await sock.sendMessage(`4${phone}@s.whatsapp.net`, { text: message });
     console.log("✅ Mesaj trimis!");
 
     // Verifică livrarea mesajului după 2 secunde
