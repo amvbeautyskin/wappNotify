@@ -6,7 +6,7 @@ env:
 
 on:
   schedule:
-    - cron: "0 12 * * 0-5" # Rulează azi de test la ora 14:00 ora Romaniei
+    - cron: "0 16 * * 0-5" # Rulează azi de test la ora 14:00 ora Romaniei
   workflow_dispatch: # Permite rularea manuală a scriptului
 
 jobs:
