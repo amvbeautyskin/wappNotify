@@ -87,7 +87,7 @@ async function sendWhatsAppMessage(phone, message) {
 
 async function checkAndSendReminders() {
     await startWhatsApp();
-    // await new Promise(resolve => setTimeout(resolve, 5000));
+    await new Promise(resolve => setTimeout(resolve, 5000));
     const appointments = await getAppointments();
 
         if (!sock) {
