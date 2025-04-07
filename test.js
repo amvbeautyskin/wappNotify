@@ -71,66 +71,23 @@ async function startWhatsApp() {
     });
 }
 
-// async function sendWhatsAppMessage(phone, message) {
-
-//     if (!sock) {
-//         console.log("⚠️ WhatsApp nu este conectat. Încep reconectarea...");
-//         await startWhatsApp();
-//     }
-
-//     await sock.sendPresenceUpdate('available', `4${phone}@s.whatsapp.net`);
-//     await delay(1000); // 1 secunde pauză
-//     console.log(`📨 Trimitere mesaj către ${phone}`);
-//     await sock.sendMessage(`4${phone}@s.whatsapp.net`, { text: message });
-//     console.log("✅ Mesaj trimis!");
-
-//     // Verifică livrarea mesajului după 2 secunde
-//     setTimeout(() => {
-//         sock.ev.on('message-status-update', (statusUpdate) => {
-//             const { messages } = statusUpdate;
-//             if (messages && messages[0]) {
-//                 const messageStatus = messages[0].status;
-//                 if (messageStatus === 'delivered') {
-//                     console.log("✅ Mesaj livrat cu succes!");
-//                 } else {
-//                     console.log("❌ Mesajul nu a fost livrat.");
-//                 }
-//             }
-//         });
-//     }, 2000); // Verifică după 2 secunde
-// }
-
 async function sendWhatsAppMessage(phone, message) {
+
     if (!sock) {
         console.log("⚠️ WhatsApp nu este conectat. Încep reconectarea...");
         await startWhatsApp();
     }
 
-    // Abonează-te la evenimentul 'message-status-update' înainte de a trimite mesajul
-    sock.ev.on('message-status-update', (statusUpdate) => {
-        const { messages } = statusUpdate;
-        if (messages && messages[0]) {
-            const messageStatus = messages[0].status;
-            if (messageStatus === 'delivered') {
-                console.log("✅ Mesaj livrat cu succes!");
-            } else if (messageStatus === 'failed') {
-                console.log("❌ Mesajul nu a fost livrat.");
-            } else {
-                console.log(`🔄 Status mesaj: ${messageStatus}`);
-            }
-        }
-    });
-
-    await sock.sendPresenceUpdate('available', `4${phone}@s.whatsapp.net`);
-    await delay(1000); // Pauză de 1 secundă
     console.log(`📨 Trimitere mesaj către ${phone}`);
+    await sock.sendPresenceUpdate('available', `4${phone}@s.whatsapp.net`);
+    // await delay(1000); // 1 secunde pauză
     await sock.sendMessage(`4${phone}@s.whatsapp.net`, { text: message });
     console.log("✅ Mesaj trimis!");
 }
 
 async function checkAndSendReminders() {
     await startWhatsApp();
-    await new Promise(resolve => setTimeout(resolve, 5000));
+    // await new Promise(resolve => setTimeout(resolve, 5000));
     const appointments = await getAppointments();
 
         if (!sock) {
@@ -159,10 +116,10 @@ async function checkAndSendReminders() {
             const dayAndTime = formattedDate.replace(/^.*?(\d{1,2} \w+.*?), (\d{2}:\d{2})$/, '$1 la ora $2');
             let message = `🔔 Reminder 🔔\nProgramare AMV Beauty Skin\nMâine, ${dayAndTime}.\nVă așteptăm cu drag!\n- 📍Maps: ${mapLinkGoogle}\n- 📍Waze: ${mapLinkWaze}`;
             await sendWhatsAppMessage(appointment.phone, message);
-            await new Promise(resolve => setTimeout(resolve, 3000));
+            // await new Promise(resolve => setTimeout(resolve, 3000));
         }
 
-        setTimeout(() => process.exit(0), 5000);
+        // setTimeout(() => process.exit(0), 5000);
 }
 
 
