@@ -13,11 +13,6 @@ function extractPhoneNumber(description) {
     return match ? match[1] : null;
 }
 
-function extractName(title) {
-    const words = title.split(' ');
-    return words.pop();
-}
-
 async function getAppointments() {
     const auth = new google.auth.GoogleAuth({
         keyFile: "google-credentials.json",
@@ -57,8 +52,7 @@ async function startWhatsApp() {
     sock = makeWASocket({
         auth: state,
         printQRInTerminal: true,
-        // syncFullHistory: false,
-        syncFullHistory: true, // test only
+        syncFullHistory: false,
         shouldSyncHistoryMessage: false,
     });
 
@@ -77,17 +71,6 @@ async function startWhatsApp() {
     });
 }
 
-// async function waitForConnection() {
-//     return new Promise((resolve, reject) => {
-//         const interval = setInterval(() => {
-//             if (sock?.ws?.readyState === 1) {
-//                 clearInterval(interval);
-//                 resolve();
-//             }
-//         }, 1000); // Verifică conexiunea la fiecare 1 secundă
-//     });
-// }
-
 async function sendWhatsAppMessage(phone, message) {
 
     if (!sock) {
@@ -95,20 +78,33 @@ async function sendWhatsAppMessage(phone, message) {
         await startWhatsApp();
     }
 
-    console.log(`📨 Trimitere mesaj către ${phone}`);
     await sock.sendPresenceUpdate('available', `4${phone}@s.whatsapp.net`);
     await delay(1000); // 1 secunde pauză
-    await sock.sendMessage(`4${phone}@s.whatsapp.net`, { text: message });
+    console.log(`📨 Trimitere mesaj către ${phone}`);
+    await sock.sendMessage(`${phone}@s.whatsapp.net`, { text: message });
     console.log("✅ Mesaj trimis!");
+
+    // Verifică livrarea mesajului după 2 secunde
+    setTimeout(() => {
+        sock.ev.on('message-status-update', (statusUpdate) => {
+            const { messages } = statusUpdate;
+            if (messages && messages[0]) {
+                const messageStatus = messages[0].status;
+                if (messageStatus === 'delivered') {
+                    console.log("✅ Mesaj livrat cu succes!");
+                } else {
+                    console.log("❌ Mesajul nu a fost livrat.");
+                }
+            }
+        });
+    }, 2000); // Verifică după 2 secunde
 }
 
 async function checkAndSendReminders() {
     await startWhatsApp();
     await new Promise(resolve => setTimeout(resolve, 5000));
-
     const appointments = await getAppointments();
 
-    // async function sendMessage() {
         if (!sock) {
             console.log("⚠️ WhatsApp nu este conectat. Reîncerc...");
             return;
@@ -130,7 +126,6 @@ async function checkAndSendReminders() {
         const mapLinkWaze = 'https://ul.waze.com/ul?place=ChIJiyP4_2b1ukARtyr3f8KIqgA&ll=44.32471970%2C28.60946700&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location';
 
         for(const appointment of appointments){
-            let name = extractName(appointment.title);
             const appointmentDate = new Date(appointment.date);
             const formattedDate = appointmentDate.toLocaleString('ro-RO', optionsShort);
             const dayAndTime = formattedDate.replace(/^.*?(\d{1,2} \w+.*?), (\d{2}:\d{2})$/, '$1 la ora $2');
