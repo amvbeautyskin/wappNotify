@@ -147,7 +147,8 @@ async function checkAndSendReminders() {
             await sendWhatsAppMessage(appointment.phone, message);
             await new Promise(resolve => setTimeout(resolve, 3000));
         }
-        process.exit(0);
+
+        setTimeout(() => process.exit(0), 3000);
     // }
     // setTimeout(async () => {
     //     await sendMessage();
