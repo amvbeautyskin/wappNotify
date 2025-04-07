@@ -95,25 +95,16 @@ async function sendWhatsAppMessage(phone, message) {
         await startWhatsApp();
     }
 
-    console.log("📶 Stare socket:", sock?.user?.id);// test only
     console.log(`📨 Trimitere mesaj către ${phone}`);
     await sock.sendPresenceUpdate('available', `4${phone}@s.whatsapp.net`);
-    await delay(500); // 0.5 secunde pauză
+    await delay(1000); // 1 secunde pauză
     await sock.sendMessage(`4${phone}@s.whatsapp.net`, { text: message });
     console.log("✅ Mesaj trimis!");
 }
 
 async function checkAndSendReminders() {
     await startWhatsApp();
-
-    // try {
-    //     await waitForConnection();  // Așteaptă să se deschidă conexiunea
-    // } catch (error) {
-    //     console.error("❌ Eroare la conectare:", error);
-    //     return;
-    // }
-
-    await new Promise(resolve => setTimeout(resolve, 5000));;
+    await new Promise(resolve => setTimeout(resolve, 5000));
 
     const appointments = await getAppointments();
 
@@ -148,13 +139,7 @@ async function checkAndSendReminders() {
             await new Promise(resolve => setTimeout(resolve, 3000));
         }
 
-        setTimeout(() => process.exit(0), 3000);
-    // }
-    // setTimeout(async () => {
-    //     await sendMessage();
-    //     process.exit(0);
-    // }, 3000);
-    // return
+        setTimeout(() => process.exit(0), 5000);
 }
 
 
