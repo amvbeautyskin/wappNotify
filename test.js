@@ -116,10 +116,10 @@ async function checkAndSendReminders() {
             const dayAndTime = formattedDate.replace(/^.*?(\d{1,2} \w+.*?), (\d{2}:\d{2})$/, '$1 la ora $2');
             let message = `🔔 Reminder 🔔\nProgramare AMV Beauty Skin\nMâine, ${dayAndTime}.\nVă așteptăm cu drag!\n- 📍Maps: ${mapLinkGoogle}\n- 📍Waze: ${mapLinkWaze}`;
             await sendWhatsAppMessage(appointment.phone, message);
-            // await new Promise(resolve => setTimeout(resolve, 3000));
+            await new Promise(resolve => setTimeout(resolve, 3000));
         }
 
-        // setTimeout(() => process.exit(0), 5000);
+        setTimeout(() => process.exit(0), 5000);
 }
 
 
