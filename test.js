@@ -76,16 +76,16 @@ async function startWhatsApp() {
     });
 }
 
-async function waitForConnection() {
-    return new Promise((resolve, reject) => {
-        const interval = setInterval(() => {
-            if (sock?.ws?.readyState === 1) {
-                clearInterval(interval);
-                resolve();
-            }
-        }, 1000); // Verifică conexiunea la fiecare 1 secundă
-    });
-}
+// async function waitForConnection() {
+//     return new Promise((resolve, reject) => {
+//         const interval = setInterval(() => {
+//             if (sock?.ws?.readyState === 1) {
+//                 clearInterval(interval);
+//                 resolve();
+//             }
+//         }, 1000); // Verifică conexiunea la fiecare 1 secundă
+//     });
+// }
 
 async function sendWhatsAppMessage(phone, message) {
 
@@ -102,12 +102,12 @@ async function sendWhatsAppMessage(phone, message) {
 async function checkAndSendReminders() {
     await startWhatsApp();
 
-    try {
-        await waitForConnection();  // Așteaptă să se deschidă conexiunea
-    } catch (error) {
-        console.error("❌ Eroare la conectare:", error);
-        return;
-    }
+    // try {
+    //     await waitForConnection();  // Așteaptă să se deschidă conexiunea
+    // } catch (error) {
+    //     console.error("❌ Eroare la conectare:", error);
+    //     return;
+    // }
 
     await new Promise(resolve => setTimeout(resolve, 5000));;
 
