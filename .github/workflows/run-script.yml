@@ -5,8 +5,8 @@ env:
   CALENDAR_ID: ${{ secrets.CALENDAR_ID }}
 
 on:
-  schedule:
-    - cron: "0 16 * * 0-5" # Rulează azi de test la ora 14:00 ora Romaniei
+  # schedule:
+  #   - cron: "0 16 * * 0-5" # Rulează azi de test la ora 14:00 ora Romaniei
   workflow_dispatch: # Permite rularea manuală a scriptului
 
 jobs:
