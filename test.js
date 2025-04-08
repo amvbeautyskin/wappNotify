@@ -120,7 +120,7 @@ async function checkAndSendReminders() {
         //     await new Promise(resolve => setTimeout(resolve, 3000));
         // }
 
-        // setTimeout(() => process.exit(0), 5000);
+        setTimeout(() => process.exit(0), 5000);
 }
 
 
