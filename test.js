@@ -7,12 +7,6 @@ const CALENDAR_ID = process.env.CALENDAR_ID;
 fs.writeFileSync("google-credentials.json", process.env.GOOGLE_CREDENTIALS);
 let sock;
 
-// function extractPhoneNumber(description) {
-//     const regex = /Client phone: (\+?\d{10,15})/;
-//     const match = description?.match(regex);
-//     return match ? match[1] : null;
-// }
-
 function extractPhoneNumber(description) {
     const regex = /Client phone:\s*(\+?\d[\d\s]{8,})/;
     const match = description?.match(regex);
@@ -127,14 +121,14 @@ async function checkAndSendReminders() {
         const mapLinkGoogle = 'https://maps.app.goo.gl/dj9dhxBNHuk7EtSg8';
         const mapLinkWaze = 'https://ul.waze.com/ul?place=ChIJiyP4_2b1ukARtyr3f8KIqgA&ll=44.32471970%2C28.60946700&navigate=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location';
 
-        // for(const appointment of appointments){
-        //     const appointmentDate = new Date(appointment.date);
-        //     const formattedDate = appointmentDate.toLocaleString('ro-RO', optionsShort);
-        //     const dayAndTime = formattedDate.replace(/^.*?(\d{1,2} \w+.*?), (\d{2}:\d{2})$/, '$1 la ora $2');
-        //     let message = `🔔 Reminder 🔔\nProgramare AMV Beauty Skin\nMâine, ${dayAndTime}.\nVă așteptăm cu drag!\n- 📍Maps: ${mapLinkGoogle}\n- 📍Waze: ${mapLinkWaze}`;
-        //     await sendWhatsAppMessage(appointment.phone, message);
-        //     await new Promise(resolve => setTimeout(resolve, 3000));
-        // }
+        for(const appointment of appointments){
+            const appointmentDate = new Date(appointment.date);
+            const formattedDate = appointmentDate.toLocaleString('ro-RO', optionsShort);
+            const dayAndTime = formattedDate.replace(/^.*?(\d{1,2} \w+.*?), (\d{2}:\d{2})$/, '$1 la ora $2');
+            let message = `🔔 Reminder 🔔\nProgramare AMV Beauty Skin\nMâine, ${dayAndTime}.\nVă așteptăm cu drag!\n- 📍Maps: ${mapLinkGoogle}\n- 📍Waze: ${mapLinkWaze}`;
+            await sendWhatsAppMessage(appointment.phone, message);
+            await new Promise(resolve => setTimeout(resolve, 3000));
+        }
 
         setTimeout(() => process.exit(0), 5000);
 }
