@@ -36,6 +36,7 @@ async function getAppointments() {
         timeMax,
         singleEvents: true,
         orderBy: "startTime",
+        timeZone: "Europe/Bucharest",
     });
 
     const appointments = response.data.items.map(event => ({
