@@ -7,10 +7,20 @@ const CALENDAR_ID = process.env.CALENDAR_ID;
 fs.writeFileSync("google-credentials.json", process.env.GOOGLE_CREDENTIALS);
 let sock;
 
+// function extractPhoneNumber(description) {
+//     const regex = /Client phone: (\+?\d{10,15})/;
+//     const match = description?.match(regex);
+//     return match ? match[1] : null;
+// }
+
 function extractPhoneNumber(description) {
-    const regex = /Client phone: (\+?\d{10,15})/;
+    const regex = /Client phone:\s*(\+?\d[\d\s]{8,})/;
     const match = description?.match(regex);
-    return match ? match[1] : null;
+    if (!match) return null;
+
+    // curățăm spațiile din număr
+    const cleanedNumber = match[1].replace(/\s+/g, '');
+    return cleanedNumber;
 }
 
 async function getAppointments() {
