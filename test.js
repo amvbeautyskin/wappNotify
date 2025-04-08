@@ -26,8 +26,14 @@ async function getAppointments() {
     const tomorrow = new Date(now);
     tomorrow.setDate(now.getDate() + 1);
 
-    const timeMin = new Date(tomorrow.setHours(0, 0, 0, 0)).toISOString();
-    const timeMax = new Date(tomorrow.setHours(23, 59, 59, 999)).toISOString();
+    const startOfDay = new Date(tomorrow);
+    startOfDay.setHours(0, 0, 0, 0);
+
+    const endOfDay = new Date(tomorrow);
+    endOfDay.setHours(23, 59, 59, 999);
+
+    const timeMin = startOfDay.toISOString();
+    const timeMax = endOfDay.toISOString();
 
     const response = await calendar.events.list({
         auth: authClient,
